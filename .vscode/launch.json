@@ -1,0 +1,22 @@
+{
+  // 使用 IntelliSense 了解相关属性。
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "tools/demo.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--cfg_file=tools/cfgs/nuscenes_models/cbgs_voxel01_res3d_centerpoint.yaml",
+        "--ckpt=checkpoints/cbgs_voxel01_centerpoint_nds_6454.pth",
+        "--data_path=data/kitti_000008.bin"
+      ],
+      "cwd": "${workspaceRoot}"
+    }
+  ]
+}

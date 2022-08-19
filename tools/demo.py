@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath('.'))
+
 import argparse
 import glob
 from pathlib import Path
@@ -51,6 +55,8 @@ class DemoDataset(DatasetTemplate):
         else:
             raise NotImplementedError
 
+        from formatter import format_points
+        points = format_points(points,'nus')
         input_dict = {
             'points': points,
             'frame_id': index,
@@ -98,8 +104,8 @@ def main():
             pred_dicts, _ = model.forward(data_dict)
 
             V.draw_scenes(
-                points=data_dict['points'][:, 1:], ref_boxes=pred_dicts[0]['pred_boxes'],
-                ref_scores=pred_dicts[0]['pred_scores'], ref_labels=pred_dicts[0]['pred_labels']
+                points=data_dict['points'][:, 1:], ref_boxes=pred_dicts[0]['pred_boxes'],#(76,9)
+                ref_scores=pred_dicts[0]['pred_scores'], ref_labels=pred_dicts[0]['pred_labels']#(76)
             )
 
             if not OPEN3D_FLAG:
@@ -110,3 +116,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+# python demo.py --cfg_file cfgs/kitti_models/pv_rcnn.yaml --ckpt ../checkpoints/pv_rcnn_8369.pth --data_path ../data/kitti_000008.bin
